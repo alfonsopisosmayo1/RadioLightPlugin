@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    RadioLightPlugin (EXILED 9 / LabAPI, SCP: Secret Laboratory 14.2)
+    Referencias: copiá las DLL que se listan en lib/README.md a la carpeta lib/
+    (o pasá otras rutas con: dotnet build -c Release -p:SLManaged=RUTA -p:SLLibs=RUTA).
+  -->
+  <PropertyGroup>
+    <AssemblyName>RadioLightPlugin</AssemblyName>
+    <RootNamespace>RadioLightPlugin</RootNamespace>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <Nullable>disable</Nullable>
+    <SLManaged Condition="'$(SLManaged)' == ''">$(MSBuildThisFileDirectory)lib\Managed</SLManaged>
+    <SLLibs Condition="'$(SLLibs)' == ''">$(MSBuildThisFileDirectory)lib</SLLibs>
+    <!-- se compila contra las librerías del propio juego (Mono), no contra .NET Framework -->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <FrameworkPathOverride>$(SLManaged)</FrameworkPathOverride>
+    <NoStdLib>true</NoStdLib>
+    <NoCompilerStandardLib>true</NoCompilerStandardLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AssemblySearchPaths>{HintPathFromItem};{RawFileName}</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- hace públicos los miembros privados del juego al compilar (el plugin usa algunos) -->
+    <PackageReference Include="Krafs.Publicizer" Version="2.2.1" PrivateAssets="all" />
+    <Publicize Include="Assembly-CSharp;Assembly-CSharp-firstpass;LabApi;Mirror" IncludeCompilerGeneratedMembers="false" />
+  </ItemGroup>
+
+  <ItemGroup Label="Juego (SCPSL_Data/Managed)">
+    <Reference Include="Assembly-CSharp"><HintPath>$(SLManaged)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp-firstpass"><HintPath>$(SLManaged)\Assembly-CSharp-firstpass.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="CommandSystem.Core"><HintPath>$(SLManaged)\CommandSystem.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="LabApi"><HintPath>$(SLManaged)\LabApi.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Mirror"><HintPath>$(SLManaged)\Mirror.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Mirror.Components"><HintPath>$(SLManaged)\Mirror.Components.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="NorthwoodLib"><HintPath>$(SLManaged)\NorthwoodLib.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Pooling"><HintPath>$(SLManaged)\Pooling.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System"><HintPath>$(SLManaged)\System.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Buffers"><HintPath>$(SLManaged)\System.Buffers.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.ComponentModel.Composition"><HintPath>$(SLManaged)\System.ComponentModel.Composition.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Configuration"><HintPath>$(SLManaged)\System.Configuration.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Core"><HintPath>$(SLManaged)\System.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Data"><HintPath>$(SLManaged)\System.Data.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing"><HintPath>$(SLManaged)\System.Drawing.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.IO.Compression"><HintPath>$(SLManaged)\System.IO.Compression.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Memory"><HintPath>$(SLManaged)\System.Memory.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Net.Http"><HintPath>$(SLManaged)\System.Net.Http.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Numerics"><HintPath>$(SLManaged)\System.Numerics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Runtime"><HintPath>$(SLManaged)\System.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe"><HintPath>$(SLManaged)\System.Runtime.CompilerServices.Unsafe.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Runtime.Serialization"><HintPath>$(SLManaged)\System.Runtime.Serialization.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Threading.Tasks.Extensions"><HintPath>$(SLManaged)\System.Threading.Tasks.Extensions.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Xml"><HintPath>$(SLManaged)\System.Xml.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Xml.Linq"><HintPath>$(SLManaged)\System.Xml.Linq.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Mathematics"><HintPath>$(SLManaged)\Unity.Mathematics.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.TextMeshPro"><HintPath>$(SLManaged)\Unity.TextMeshPro.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(SLManaged)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AIModule"><HintPath>$(SLManaged)\UnityEngine.AIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AnimationModule"><HintPath>$(SLManaged)\UnityEngine.AnimationModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.AudioModule"><HintPath>$(SLManaged)\UnityEngine.AudioModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(SLManaged)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(SLManaged)\UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule"><HintPath>$(SLManaged)\UnityEngine.ParticleSystemModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>$(SLManaged)\UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>$(SLManaged)\UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>$(SLManaged)\UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule"><HintPath>$(SLManaged)\UnityEngine.UnityWebRequestModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="mscorlib"><HintPath>$(SLManaged)\mscorlib.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="netstandard"><HintPath>$(SLManaged)\netstandard.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <ItemGroup Label="EXILED, Harmony, RueI">
+    <Reference Include="Exiled.API"><HintPath>$(SLLibs)\Exiled.API.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Exiled.Events"><HintPath>$(SLLibs)\Exiled.Events.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Exiled.CustomRoles"><HintPath>$(SLLibs)\Exiled.CustomRoles.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(SLLibs)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="RueI"><HintPath>$(SLLibs)\RueI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(SLLibs)\Newtonsoft.Json.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

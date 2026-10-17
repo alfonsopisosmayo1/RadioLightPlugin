@@ -1,0 +1,11 @@
+# Agregá estas líneas dentro de "radio_light_plugin:" en .config/EXILED/Configs/<puerto>-config.yml
+# (con 2 espacios adelante, igual que el resto de opciones del plugin). Vacío = esa función queda apagada.
+radio_light_plugin:
+  discord_webhook: ''        # logs generales (resumen de ronda, server lleno, baneos, SCP AFK)
+  webhook_votacion: ''       # resultados de las votaciones
+  webhook_vip: ''            # logs de VIP
+  webhook_vip_compras: ''    # segundo canal de VIP
+  webhook_vip_cassie: ''     # cuando un VIP usa el CASSIE
+  steam_api_key: ''          # comando "evento" (lee el perfil de Steam)
+  gemini_api_key: ''         # respuestas con IA (Google Gemini)
+  gpt_api_url: ''            # proxy de GPT con la api_key incluida, sin el prompt
